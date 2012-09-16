@@ -63,7 +63,8 @@ for i=1:P
     
     array(p,3) = z_z;    
  end
-    savefile=strcat('Populacja/',int2str(i),'.dat');
+    addpath(strcat(pwd,'\Populacja'));
+    savefile=strcat(int2str(i),'.dat');
     save(savefile, 'array','-ASCII');
 end;
 %   Detailed explanation goes here
