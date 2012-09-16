@@ -1,5 +1,5 @@
 function [ output_args ] = main( magazynX,magazynY,magazynZ,P,N,G,M,K,ILE )
-addpath('Populacja');
+
 %parametry WEJŒCIOWE, definicja i odczytywanie zwejœcia
 	%(P)Populacja=liczba osobnikow w populacji, default=50;
 	%(N)Niezmienione=% osobnikow przepisywanych 1:1 w g³ównym cyklu, default 20;

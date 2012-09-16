@@ -1,6 +1,6 @@
 function [ output_args ] = generacja_populacji( P,Palety,mag )
 %GENERACJA Summary of this function goes here
-addpath('Populacja');
+addpath(strcat(pwd,'\Populacja'));
 for i=1:P 
  [magRowsNum, magColumnNum, magZNum] = size(mag);
 
