@@ -49,32 +49,104 @@ classdef magazyn
             %disp(mag.map);
         end % magazyn
         
-        %% checks if place is empty
+        %% checks if place is empty - if not, returns next empty place
+        % to reserve place use: mag = mag.reserve_place(mag.check_place(destination, max_number_of_attempts));
         %@param destination place to check
-        function ret = check_place(mag, destination)
-            dest_width = tra.destination(1);    %destination width
-            dest_length = tra.destination(2);   %destination length
-            dest_heigth = tra.destination(3);   %destination heigth
+        %@param max_number_of_attempts maximum number of tries to find free space
+        %@return empty place
+        %@throws error when there is no more free slots or max number of
+        %               attempts was exceeded
+        function ret = check_place(mag, destination, max_number_of_attempts)
+            if (mag.is_place_alley(destination))    %if destination is an alley throw error
+                error(['Place [', num2str(destination(1)), ' ', num2str(destination(2)), ' ', num2str(destination(3)), '] is an alley!']);
+            end;
             
-            
-            
-            
-            ret = destination;
-        end
+            if (mag.is_place_occupied(destination) || mag.is_place_reserved(destination))   %if place is occupied or reserved
+                if (ismember(0, mag.map) == 0)
+                    error('There is no more free slots in magazyn!');
+                end %if
+
+                new_destination_to_check = destination;
+                other_place = mag.check_other_heights_in_destination(new_destination_to_check);     %check other heights in destination place
+                number_of_attempts = mag.heigth;
+                
+                while (other_place == false)        % while other place is non-empty
+                    
+                    if (number_of_attempts >= max_number_of_attempts)
+                        error(['Max number of attempts exceeded: ', num2str(max_number_of_attempts)]);
+                    end %if
+                    
+                    new_destination_to_check(1) = new_destination_to_check(1) + 1;      %increse width
+                    
+                    if (mag.is_place_alley(new_destination_to_check))                   %if width will be to large, then go to next length and start from first non-alley width
+                        new_destination_to_check(1) = 2;
+                        
+                        new_destination_to_check(2) = new_destination_to_check(2) + 1;  % increase length
+                        
+                        if (mag.is_place_alley(new_destination_to_check))               % if new place is alley
+                            new_destination_to_check(2) = new_destination_to_check(2) + 1; %increase length
+                        end %if
+                        
+                        if (new_destination_to_check(2) > mag.length - 1)               % if length will be too large then go to the first non-alley
+                            new_destination_to_check(2) = 2;
+                        end %if
+                    end %if
+                    other_place = mag.check_other_heights_in_destination(new_destination_to_check);     %check other heights in new destination place
+                    number_of_attempts = number_of_attempts + mag.heigth;
+                end %while
+                
+                ret = other_place;
+            else
+                ret = destination;
+            end %if
+        end %check_place
         
-        %% check if place is empty
+        %% check other heights in destination
+        %@param destination
+        %@return first free destination or false if all places in
+        %   destination are non-empty
+        function ret = check_other_heights_in_destination(mag, destination)
+            ret = false;
+            for i = 1 : mag.heigth
+               new_destination = [destination(1), destination(2), i]
+               mag.map(new_destination(1), new_destination(2), new_destination(3))
+%                pause;
+                if (~mag.is_place_occupied(new_destination) && ~mag.is_place_reserved(new_destination))
+                    ret = new_destination;
+                end %if
+            end %for
+        end %check_other_heights_in_destination
+        
+        %% reserves given place
+        %@param destination
+        %@return magazyn object
+        function ret = reserve_place(mag, place)
+            mag.map(place(1), place(2), place(3)) = 2;
+            ret = mag;
+        end %reserve_place
+        
+        %% check if place is occupied
         %@ param destination place to check
+        %@ return boolean - true is occupied
         function ret = is_place_occupied(mag, destination)
             ret = mag.map(destination(1), destination(2), destination(3)) == 1;
         end % is_place_empty
         
         %% check if place is reserved
         %@ param destination place to check
+        %@ return boolean - true if place is reserved
         function ret = is_place_reserved(mag, destination)
             ret = mag.map(destination(1), destination(2), destination(3)) == 2;
         end % is_place_reserved
         
-        %% dispaly maazyn map
+        %% check if place is alley
+        %@ param destination place to check
+        %@ return boolean - true if place is an alley
+        function ret = is_place_alley(mag, destination)
+            ret = mag.map(destination(1), destination(2), destination(3)) == 8;
+        end %is_place_alley
+        
+        %% dispaly magazyn map
         function display_current_state(mag)
             disp(mag.map);
         end % display_current_state
@@ -89,7 +161,7 @@ classdef magazyn
                 end %while
                 mag.map(temp(1), temp(2), temp(3)) = 1;
             end % for
-            disp(mag.map);
+%             disp(mag.map);
             psp = mag;
         end % prepare start packs         
     end % methods
