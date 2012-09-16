@@ -62,7 +62,7 @@ end;
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
         for ile=poczatek2:1:P
-			%tablicaPopulacji(ile)=CrossingOfSubject(mutowanie,Palety,M,P);
+			tablicaPopulacji(ile)=CrossingOfSubject(mutowanie,Palety,M,P);
         end;
    end;
 	
