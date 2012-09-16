@@ -55,7 +55,7 @@ end;
         %kolejny_osobnik=bad;
            tablicaPopulacji((P*N*0.01)+1)=bad();
 %%%%%%%%%%%%%%%Mutowane
-        poczatek=round((P*N*0.01)+2);
+        poczatek=round((P*N*0.01)+1); %1 poniewaz ile zaczyna sie od wartosci 1
 		[mutowanieSizeX,mutowanieSizeY] = size(mutowanie);
         for ile=1:1:mutowanieSizeY %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
             tablicaPopulacji(poczatek + ile) = mutationOfSubject(mutowanie(ile), obiektMagazyn.map);
