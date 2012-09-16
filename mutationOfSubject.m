@@ -5,7 +5,15 @@ function object = mutationOfSubject(obj,mag)
     [rowsNum, columnNum] = size(A);
    
     for rows=1:1:rowsNum
-        i = randi([1,3]); % wybieramy losowo który parametr mamy zmieniæ w palecie:  x | y | z
+         % wybieramy losowo który parametr mamy zmieniæ w palecie:  x | y | z
+        
+        i = rand(1,1);
+            i_i = round(i*3);
+            
+            if (i_i == 0) 
+                i_i = 1;
+            end
+            
         if (i==1)
             x = rand(1,1);
             x_x = round(x*magRowsNum);
