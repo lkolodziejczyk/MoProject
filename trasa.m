@@ -16,6 +16,10 @@ classdef trasa
             tra.destination = destination;
             tra.magazyn = magazyn;
             
+            if (destination(3) > magazyn.heigth)
+                error(['Paczka too high! - invalid height: ' num2str(dest_heigth), ' is bigger than magazyn height: ', magazyn.heigth]);
+            end %if
+            
             if (~tra.check_if_dest_empty()) %validation - is destination empty
                 error(['Destination: [', num2str(destination(1)), ' ', num2str(destination(2)), ' ', num2str(destination(3)), '] is not empty!']);
             end %if
@@ -29,7 +33,7 @@ classdef trasa
         function path = get_path(tra, magazyn)
             dest_width = tra.destination(1);    %destination width
             dest_length = tra.destination(2);   %destination length
-            dest_height = tra.destination(3);   %destination height
+            dest_heigth = tra.destination(3);   %destination heigth
             
             path(1,:) = tra.startPoint;         %add start point as first step on our path
                       
@@ -87,7 +91,7 @@ classdef trasa
             
             %% lift package up (height)
             path_width = path(length(path), 1);
-            for i = 1 : dest_height
+            for i = 2 : dest_heigth
                 path_iterator = path_iterator + 1;
                 path(path_iterator, :) = [path_width, path_length, i];
             end;
@@ -96,7 +100,7 @@ classdef trasa
         %checks if destination is empty
         %@return boolean - true if empy
         function cide = check_if_dest_empty(tra)
-            cide = tra.magazyn.map(tra.destination(1), tra.destination(2), tra.destination(3)) == 0;
+            cide = tra.magazyn.map(tra.destination(1), tra.destination(2), tra.destination(3)) ~= 1;
         end
     end % methods
 end     
