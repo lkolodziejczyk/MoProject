@@ -22,7 +22,7 @@ end;
 	generacja_populacji(P,Palety,obiektMagazyn.map);
     
 %³aduj populacje
-    tablicaPopulacji = loadDataFunction(obiektMagazyn);
+    tablicaPopulacji = loadDataFunction(obiektMagazyn, P);
     
 %du¿a pêtla(po populacjach)
 	for i=1:ILE
