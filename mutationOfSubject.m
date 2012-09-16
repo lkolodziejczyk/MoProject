@@ -47,7 +47,14 @@ function object = mutationOfSubject(obj,mag)
         end
         
         if(i==3)
-            A(rows,i) = randi([1,3]);
+            z = rand(1,1);
+                z_z = round(z*3);
+               
+                if (z_z == 0) 
+                    z_z = 1;
+                end
+            end
+            A(rows,i) = z_z;
         end
     end
     obj.newMainArray(A);
