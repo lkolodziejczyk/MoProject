@@ -4,6 +4,7 @@ classdef magazyn
     properties
         % 0 w magazynie to puste miejsce
         % 1 to zajete miejsce
+        % 2 to jest miejsce zaklepane - tylko na potrzeby check_place
         % 8 to pusta sciezka
         % 7 to zajeta sciezka
         heigth;
@@ -11,12 +12,13 @@ classdef magazyn
         length;
         map;
         wozek_count = 4;
+        free_wozek_count;
         paths_offsets = [2 10];
         wozek_start = [0 0];
     end % properties
     
     methods
-        % class constructor
+        %% class constructor
         %@param width magazyn width
         %@param length magazyn length
         %@param height magazyn heigth
@@ -40,18 +42,25 @@ classdef magazyn
             for i = 1 : mag.paths_offsets(1) + 1 : mag.length + 1
                 mag.map(:,i,:) = 8;
             end
-             for i = 1 : mag.paths_offsets(2) + 1 : mag.width + 1
-                mag.map(i,:,:) = 8;
+            for i = 1 : mag.paths_offsets(2) + 1 : mag.width + 1
+               mag.map(i,:,:) = 8;
             end
+            mag.free_wozek_count = mag.wozek_count;
             %disp(mag.map);
         end % magazyn
         
-        % dispaly maazyn map
+        %% checks if place is empty
+        %@param destination place to check
+        function ret = check_place(mag, destination)
+            ret = destination;
+        end
+        
+        %% dispaly maazyn map
         function display_current_state(mag)
             disp(mag.map);
         end % display_current_state
         
-        % prepare start state ofmagazyn map (there are some packs there already)
+        %% prepare start state ofmagazyn map (there are some packs there already)
         function psp = prepare_start_packs(mag, limit)
             for i = 1:limit
                  
