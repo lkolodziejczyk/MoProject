@@ -23,7 +23,6 @@ function object=CrossingOfSubject(do_mutowania,Palety,M,P)
         drugi=1;
         end;
     end;
-    end;
  
   
     for rows=miejsce:1:Palety
