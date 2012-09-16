@@ -53,10 +53,10 @@ function object = mutationOfSubject(obj,mag)
                 if (z_z == 0) 
                     z_z = 1;
                 end
-            end
+         end
             A(rows,i) = z_z;
-        end
-    end
+       end
+    
     obj.newMainArray(A);
     object = obj;
 end
