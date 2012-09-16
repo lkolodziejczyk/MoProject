@@ -22,7 +22,7 @@ end;
 	generacja_populacji(P,Palety,obiektMagazyn.map);
     
 %³aduj populacje
-    tablicaPopulacji = loadDataFunction(obiektMagazyn);
+    tablicaPopulacji = loadDataFunction(obiektMagazyn,P);
     
 %du¿a pêtla(po populacjach)
 	for i=1:ILE
@@ -64,13 +64,11 @@ end;
 			tablicaPopulacji(ile).palletsArray=CrossingOfSubject(mutowanie,Palety,M,P);
         end;
    end;
-	%pêtla ma³a (po osobnikach)
-		for j=0:P
+	
 %%%%%%%%%%%%%%%%%PUDE£KO MAGAZYU
-		%populacja[j][]=MAGAZYN(populacja[j])    %przekazujemy osobnika, a
-		%w wyniku do otrzymujemy osobnika po przejœciu przezmagazyn wraz z
+        %tablicaPopulacji=deploy(obiektMagazyn,tablicaPopulacji);
+		%w wyniku do otrzymujemy tablice osobników po przejœciu przezmagazyn wraz z
 		%wartoœci¹ funkcji celu
-        end;
 %%%%%%%%%%%%%%SORTOWANIE TABLICY OSOBNIKOW
 	%populacja[][]=sortuj_populacje(populacja[][]); %sortowanie populacji
 	%(osobnikow) wg wartoœci funkcji celu: najlepsze (o najmniejszej
