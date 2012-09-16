@@ -1,4 +1,4 @@
-function table = loadDataFunction()
+function table = loadDataFunction(mag)
 addpath('Populacja');
    
 BaseName='.dat';
@@ -8,7 +8,7 @@ BaseName='.dat';
      
         obj = subject(B);
         g = magazyn(20,6,1);
-        b = mutationOfSubject(obj,g.map);
+        b = mutationOfSubject(obj,mag.map);
 
         table(a,1) = b;
     end
