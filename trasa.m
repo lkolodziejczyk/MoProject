@@ -2,9 +2,10 @@ classdef trasa
     
     properties
         % cel dla paczki
-        destination             %= [x y z],
-        path                    %array with coords for each point on the path
+        destination;            %= [x y z],
+        path;                   %array with coords for each point on the path
         startPoint = [1 1 1];
+        magazyn;                %magazyn object
     end % properties
     
     methods
@@ -12,12 +13,19 @@ classdef trasa
         %@param destination - end of path [width length height]
         %@param magazyn - magazyn object
         function tra = trasa(destination, magazyn)
-             tra.destination = destination;
-             tra.path = tra.get_path(magazyn);
+            tra.destination = destination;
+            tra.magazyn = magazyn;
+            
+            if (~tra.check_if_dest_empty()) %validation - is destination empty
+                error(['Destination: [', num2str(destination(1)), ' ', num2str(destination(2)), ' ', num2str(destination(3)), '] is not empty!']);
+            end %if
+            
+            tra.path = tra.get_path(magazyn);
         end % trasa
         
         % get trasa for destination
         %@param magazyn - magazyn object
+        %@return array with coords for each point on the path
         function path = get_path(tra, magazyn)
             dest_width = tra.destination(1);    %destination width
             dest_length = tra.destination(2);   %destination length
@@ -27,10 +35,14 @@ classdef trasa
                       
             behind_middle = dest_width > magazyn.width / 2;     %check if destination width is above or below midle
             
+            if (dest_width == 1 || dest_width == magazyn.width)
+                error(['Paczka on alley! - invalid width: ' num2str(dest_width)]);
+            end %if
+            
             path_iterator = 1;
             
             %% go up
-            if (behind_middle)
+            if (behind_middle)          %%if detination is above middle the go up
                 for i = 1 : magazyn.width
                     path_iterator = path_iterator + 1;
                     path(path_iterator, :) = [i 1 1];   
@@ -41,22 +53,18 @@ classdef trasa
             
             %from which alley you'll place your paczka
             switch mod(int8(dest_length - 1), 3)
-                case 1 %left side
-                    path_length = dest_length - 1;
-                case 2 %right side
-                    path_length = dest_length + 1;
+                case 1 %alley on the left from paczka
+                    turn_on_length = dest_length - 1;
+                case 2 %alley on the right from paczka
+                    turn_on_length = dest_length + 1;
                 otherwise
-                    error('Paczka on alley!');
-            
+                    error(['Paczka on alley! - invalid length: ' num2str(dest_length)]);
             end %switch
 
-            if (behind_middle)
-                path_width = path(length(path), 1);
-            else
-                path_width = 1;
-            end %if
-
-            for i = 2 : path_length
+            path_width = path(size(path, 1), 1);
+            
+            %go right to the alley when you will turn
+            for i = 2 : turn_on_length
                 path_iterator = path_iterator + 1;
                 path(path_iterator, :) = [path_width, i, 1];
             end %for
@@ -77,7 +85,7 @@ classdef trasa
                 end %for
             end %if
             
-            %% go up (height)
+            %% lift package up (height)
             path_width = path(length(path), 1);
             for i = 1 : dest_height
                 path_iterator = path_iterator + 1;
@@ -85,39 +93,10 @@ classdef trasa
             end;
         end % get_path
         
-        % sets destination
-        function set_destination(tra, dest)
-            tra.destination = dest;
-        end
-        
         %checks if destination is empty
-        % @param magazyn current magazyn instance
-        function cide = check_if_dest_empty(tra, magazyn)
-            if ~tra.dest
-                return
-            end
-%             if magazyn.map[tra.dest[0]][tra.dest[1]][tra.dest[2]] == 0
-%                 cide = true;
-%                 return
-%             end
-            cide = false;
-            return    
+        %@return boolean - true if empy
+        function cide = check_if_dest_empty(tra)
+            cide = tra.magazyn.map(tra.destination(1), tra.destination(2), tra.destination(3)) == 0;
         end
-        
-        % if place is taken find another one
-        function fap = find_another_place(tra, magazyn)
-            if ~tra.check_if_dest_empty(magazyn)
-                % TODO
-            end
-        end
-        
-        % calsulates path based on destination
-        function cp = calculate_path(tra)
-            % TODO
-        end
-
-        
-        
-        
     end % methods
 end     
