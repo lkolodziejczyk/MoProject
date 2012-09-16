@@ -19,7 +19,7 @@ end;
     obiektMagazyn = magazyn(magazynX,magazynY,magazynZ);
     
 %generuj populacje
-	generacja_populacji(P,Palety);
+	generacja_populacji(P,Palety,obiektMagazyn.map);
     
 %³aduj populacje
     tablicaPopulacji = loadDataFunction();
