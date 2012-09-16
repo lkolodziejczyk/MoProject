@@ -1,5 +1,5 @@
 function [ output_args ] = main( magazynX,magazynY,magazynZ,P,N,G,M,K,ILE )
-
+addpath('Populacja');
 %parametry WEJŒCIOWE, definicja i odczytywanie zwejœcia
 	%(P)Populacja=liczba osobnikow w populacji, default=50;
 	%(N)Niezmienione=% osobnikow przepisywanych 1:1 w g³ównym cyklu, default 20;
@@ -30,37 +30,33 @@ end;
 	%GENETYKA, jak pierwsza pêtla to omiñ genetykê
 	if(i~=1) 
 %%%%%%%%%%%przepisywanie najlepszych osobnikow
-		for k=1:(P*N*0.01)
-		%	best[k][]=populacja[k][];	
+		for k=1:1:round(P*N*0.01)
+			best(k)=tablicaPopulacji(k);	
         end;
 %%%%%%%%%%przepisanie randomowego z gorszych wynikow
 		%ktory=rand z 10% najgorszych wyników
-		ktory = P*0,9 + (rand * 2);
-        %bad[]=populacja([ktory][]);
+		ktory = round(P*0.9+(rand*P*0.1));
+        bad=tablicaPopulacji(ktory);
 %%%%%%%%%%%do krzy¿owania
-		for m=1:M
-			%mutowane[m][]=populacja[m][]; %pierwsze M osobnikow
+		for m=1:1:M
+			mutowanie(m)=tablicaPopulacji(m); %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
-%%%%%%%%%5czyszczenie populacji (tworzenie kolejnej)
-		for j=0:P
-			%populacja[j][]=0; %czyszczenie tablic nowej populacji
-        end;
 %%%%%%%%%%przepisywanie najlepszych
-        for k=1:(P*N*0.01)
-		%	populacja[k][]=best[k][];	
+        for k=1:1:(P*N*0.01)
+		tablicaPopulacji(k)=best(k);	
         end;
         %kolejny_osobnik=bad;
-            %populacja[(P*N*0.01)+1]=bad[];
+           tablicaPopulacji((P*N*0.01)+1)=bad();
 %%%%%%%%%%%%%%%Mutowane
-        poczatek=(P*N*0.01)+2;
-		for ile=poczatek:(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
-			%populacja[ile][]=Mutacja(mutowanie);
+        poczatek=round((P*N*0.01)+2);
+		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
+			tablicaPopulacji(ile,1) = mutationOfSubject(tablicaPopulacji(ile,1), obiektMagazyn.map);
         end;
 %%%%%%%%%%%%%Krzy¿owanie
-		poczatek2=poczatek+M*0.01+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
-        for ile=poczatek2:P
-			%populacja[ile][]=Krzy¿owanie(mutowanie);
+		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
+        for ile=poczatek2:1:P
+			tablicaPopulacji(ile,1)=CrossingOfSubject(mutowanie,Palety,M);
         end;
    end;
 	%pêtla ma³a (po osobnikach)

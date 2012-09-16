@@ -65,6 +65,7 @@ function object = mutationOfSubject(obj,mag)
          end
             
        end
+
     
     obj.newMainArray(A);
     object = obj;

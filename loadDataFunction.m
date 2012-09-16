@@ -8,7 +8,7 @@ BaseName='.dat';
      
         obj = subject(B);
         g = magazyn(20,6,1);
-        b = mutationOfSubject(obj,mag.map);
+%        b = mutationOfSubject(obj,mag.map);
 
-        table(a,1) = b;
+        table(a,1) = obj;
     end
