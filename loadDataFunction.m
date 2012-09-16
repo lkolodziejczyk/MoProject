@@ -1,5 +1,5 @@
 function table = loadDataFunction(i)
-addpath(strcat(pwd,'\Populacja'));
+addpath(strcat(pwd));
 BaseName='.dat';
 table = [];
    for a=1:1:i 
@@ -8,7 +8,6 @@ table = [];
         obj = subject(B);
         g = magazyn(20,6,1);
 %        b = mutationOfSubject(obj,mag.map);
-obj
         table = [table obj];
    end
 end
