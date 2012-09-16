@@ -17,7 +17,7 @@ if	(N+M+K)~=100
 end;
 %generuj magazyn
     obiektMagazyn = magazyn(magazynX,magazynY,magazynZ);
-    
+
 %generuj populacje
 	generacja_populacji(P,Palety,obiektMagazyn.map);
     
@@ -39,7 +39,8 @@ end;
         bad=tablicaPopulacji(ktory);
 %%%%%%%%%%%do krzy¿owania
 		for m=1:1:round(P*M*0.01)
-			mutowanie(m)=tablicaPopulacji(m); %pierwsze M osobnikow
+			mutowanie(m)=tablicaPopulacji(m);
+            %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
 %%%%%%%%%%%%%czyszczenie tablicyPopulacji        

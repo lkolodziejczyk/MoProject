@@ -1,7 +1,7 @@
 function object = mutationOfSubject(obj,mag)
    
     A = obj.palletsArray;
-    [magRowsNum, magColumnNum] = size(mag);
+    [magRowsNum, magColumnNum, magZNum] = size(mag);
     [rowsNum, columnNum] = size(A);
    
     for rows=1:1:rowsNum

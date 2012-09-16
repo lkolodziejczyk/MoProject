@@ -2,7 +2,7 @@ function [ output_args ] = generacja_populacji( P,Palety,mag )
 %GENERACJA Summary of this function goes here
 addpath('Populacja');
 for i=1:P 
- [magRowsNum, magColumnNum] = size(mag);
+ [magRowsNum, magColumnNum, magZNum] = size(mag);
 
 %    x=rand(Palety,3);
  %   (((100 - 1) .* x) + 1) - mod((((100 - 1) .* x) + 1) , 1);
