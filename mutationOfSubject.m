@@ -61,10 +61,11 @@ function object = mutationOfSubject(obj,mag)
                 if (z_z == 0) 
                     z_z = 1;
                 end
+            A(rows,i) = z_z;
          end
-            A(rows,i) = int8(z_z);
+            
+       end
 
-    end
     
     obj.newMainArray(A);
     object = obj;
