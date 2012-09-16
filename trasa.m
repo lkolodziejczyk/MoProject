@@ -17,7 +17,7 @@ classdef trasa
             tra.magazyn = magazyn;
             
             if (destination(3) > magazyn.heigth)
-                error(['Paczka too high! - invalid height: ' num2str(dest_heigth), ' is bigger than magazyn height: ', magazyn.heigth]);
+                error(['Paczka too high! - invalid height: ' num2str(destination(3)), ' is bigger than magazyn height: ', magazyn.heigth]);
             end %if
             
             if (~tra.check_if_dest_empty()) %validation - is destination empty

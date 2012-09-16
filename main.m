@@ -22,8 +22,12 @@ end;
 	generacja_populacji(P,Palety,obiektMagazyn.map);
     
 %³aduj populacje
+<<<<<<< HEAD
     tablicaPopulacji = loadDataFunction(obiektMagazyn,P);
    
+=======
+    tablicaPopulacji = loadDataFunction(P);
+>>>>>>> remotes/origin/lukasz
 %du¿a pêtla(po populacjach)
 	for i=1:ILE
     
@@ -45,8 +49,8 @@ end;
         end;
 %%%%%%%%%%%%%czyszczenie tablicyPopulacji        
         for m=1:1:P
-          tablicaPopulacji(m).palletsArray=zeros(Palety,3);
-          %cotam jeszcze jest do wyszyczenia?
+          tablicaPopulacji(m).palletsArray=[];
+          tablicaPopulacji(m).mainArray=[];  
         end;    
 %%%%%%%%%%przepisywanie najlepszych
         for k=1:1:(P*N*0.01)
@@ -55,6 +59,7 @@ end;
         %kolejny_osobnik=bad;
            tablicaPopulacji((P*N*0.01)+1)=bad();
 %%%%%%%%%%%%%%%Mutowane
+<<<<<<< HEAD
         poczatek=round((P*N*0.01)+2);
 		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
 			tablicaPopulacji(ile,1) = mutationOfSubject(tablicaPopulacji(ile,1), obiektMagazyn.map);
@@ -64,19 +69,51 @@ end;
         for ile=poczatek2:1:P
 			tablicaPopulacji(ile)=CrossingOfSubject(mutowanie,Palety,M,P);
         end;
+=======
+        poczatek=round((P*N*0.01)+1); %1 poniewaz ile zaczyna sie od wartosci 1
+		[mutowanieSizeX,mutowanieSizeY] = size(mutowanie);
+        for ile=1:1:mutowanieSizeY %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
+            tablicaPopulacji(poczatek + ile) = mutationOfSubject(mutowanie(ile), obiektMagazyn.map);
+        end;
+        
+%%%%%%%%%%%%%Krzy¿owanie
+		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
+%        for ile=poczatek2:1:P
+			tablicaPopulacji(ile)=CrossingOfSubject(mutowanie,Palety,M,P);
+%        end;
+>>>>>>> remotes/origin/lukasz
    end;
 	
 %%%%%%%%%%%%%%%%%PUDE£KO MAGAZYU
         %tablicaPopulacji=deploy(obiektMagazyn,tablicaPopulacji);
 		%w wyniku do otrzymujemy tablice osobników po przejœciu przezmagazyn wraz z
 		%wartoœci¹ funkcji celu
+        %for b=1:1:P
+        %tablicaPopulacji(b).time=(rand(1,1)*100);
+        %end;
 %%%%%%%%%%%%%%SORTOWANIE TABLICY OSOBNIKOW
-	%populacja[][]=sortuj_populacje(populacja[][]); %sortowanie populacji
-	%(osobnikow) wg wartoœci funkcji celu: najlepsze (o najmniejszej
-	%wartoœci funkcji celu wy¿ej)
+    %for b=1:1:P
+    %wartosci(b,1)=b;
+    %wartosci(b,2)=tablicaPopulacji(b).time;
+    %end;
+    %[val, ind] = sort(wartosci(:, 2));    % col - numer kolumny
+    %wartosci = wartosci(ind, :);
+    %srednia=mean(wartosci(:,2));
+    %for b=1:1:P
+    %tablicaPomoc(b)=tablicaPopulacji(wartosci(b,1));
+    %end;
+    %for b=1:1:P
+    %tablicaPopulacji(b)=tablicaPomoc(b);
+    %end;
+	
 	
 %%%%%%%%5%ZAPYSYWANIE WYNiKOW.... (?) dla ka¿dej pêtli: min,œr i max
 %%%%%%%%wartoœæ funkcji celu 
+   % minimum=tablicaPopulacji(1).time;
+   % maximum=tablicaPopulacji(P).time;
+   % minimum
+   % maximum
+   % srednia
 	%jakas_funkcja_zapisujaca_jakos_wyniki(populacja[][]);
         
     end;    
