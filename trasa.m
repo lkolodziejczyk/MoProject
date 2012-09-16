@@ -9,33 +9,33 @@ classdef trasa
     
     methods
         % class constructor
-        %@param destination - end of path [length
-        function tra = trasa(destination)
+        %@param destination - end of path [width length height]
+        %@param magazyn - magazyn object
+        function tra = trasa(destination, magazyn)
              tra.destination = destination;
+             tra.path = tra.get_path(magazyn);
         end % trasa
         
         % get trasa for destination
         %@param magazyn - magazyn object
         function path = get_path(tra, magazyn)
-            dest_width = tra.destination(1);
-            dest_length = tra.destination(2);
-            dest_height = tra.destination(3);
+            dest_width = tra.destination(1);    %destination width
+            dest_length = tra.destination(2);   %destination length
+            dest_height = tra.destination(3);   %destination height
             
-            path(1,:) = tra.startPoint;
-            
+            path(1,:) = tra.startPoint;         %add start point as first step on our path
                       
-            behind_middle = dest_width > magazyn.width / 2;
+            behind_middle = dest_width > magazyn.width / 2;     %check if destination width is above or below midle
             
             path_iterator = 1;
             
             %% go up
             if (behind_middle)
-                for path_iterator = path_iterator : magazyn.width
-                    path(path_iterator+1, :) = [path_iterator 1 1];
-%                 tra.path(i) = [1 1 1];
+                for i = 1 : magazyn.width
+                    path_iterator = path_iterator + 1;
+                    path(path_iterator, :) = [i 1 1];   
                 end %for
             end %if
-            path_iterator = path_iterator + 1;
             
             %% go right
             
@@ -49,34 +49,40 @@ classdef trasa
                     error('Paczka on alley!');
             
             end %switch
-            path
-            dlu = length(path)
-            path_width = path(length(path), 1)
+
+            if (behind_middle)
+                path_width = path(length(path), 1);
+            else
+                path_width = 1;
+            end %if
 
             for i = 2 : path_length
                 path_iterator = path_iterator + 1;
                 path(path_iterator, :) = [path_width, i, 1];
             end %for
             
-            path_length = path(length(path), 2)
-            dest_length
+            path_length = path(length(path), 2);
             
             %% go down or up depends on destination width
             if (behind_middle) %go down
-                display('true');
                 length_diff = path_width - dest_width;
                 for i = 1 : length_diff
                     path_iterator = path_iterator + 1;
                     path(path_iterator, :) = [path_width - i, path_length, 1];
                 end %if
             else %go up
-                
+                for i = 2 : dest_width
+                    path_iterator = path_iterator + 1;
+                    path(path_iterator, :) = [i, path_length, 1];
+                end %for
             end %if
             
-            
-%             magazyn.heigth
-%             magazyn.width
-%             magazyn.length
+            %% go up (height)
+            path_width = path(length(path), 1);
+            for i = 1 : dest_height
+                path_iterator = path_iterator + 1;
+                path(path_iterator, :) = [path_width, path_length, i];
+            end;
         end % get_path
         
         % sets destination
