@@ -1,7 +1,8 @@
 function [ output_args ] = generacja_populacji( P,Palety,mag )
 %GENERACJA Summary of this function goes here
+addpath(strcat(pwd,'\Populacja'));
 for i=1:P 
- [magRowsNum, magColumnNum] = size(mag);
+ [magRowsNum, magColumnNum, magZNum] = size(mag);
 
 %    x=rand(Palety,3);
  %   (((100 - 1) .* x) + 1) - mod((((100 - 1) .* x) + 1) , 1);
@@ -63,7 +64,7 @@ for i=1:P
     
     array(p,3) = z_z;    
  end
-    savefile=strcat('Populacja/',int2str(i),'.dat');
+    savefile=strcat(int2str(i),'.dat');
     save(savefile, 'array','-ASCII');
 end;
 %   Detailed explanation goes here

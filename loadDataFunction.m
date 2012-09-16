@@ -1,5 +1,5 @@
 function table = loadDataFunction(mag, i)
-addpath('Populacja');
+addpath(strcat(pwd,'\Populacja'));
    
 BaseName='.dat';
    for a=1:1:i 
