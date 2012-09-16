@@ -12,25 +12,56 @@ for i=1:P
  %  save(savefile, 'x','-ASCII');
  array = zeros(Palety,3);
  for p=1:1:Palety
-    x = randi([1,magRowsNum]);
-    array(p,1) = x;
+    x = rand(1,1);
+    x_x = round(x*magRowsNum);
+    if (x_x == 0) 
+        x_x = 1;
+    end
     
-    y = randi([1,magColumnNum]);
+    array(p,1) = x_x;
+    
+    y = rand(1,1);
+    y_y = round(y*magColumnNum);
+    
+    if (y_y == 0) 
+        y_y = 1;
+    end
+    
     index = 1;
-    while(mag(x,y)==8)
-        y = randi([1,magColumnNum]);
+    while(mag (x_x,y_y)==8)
+        y = rand(1,1);
+        y_y = round(y*magColumnNum);
+        
+        if (y_y == 0) 
+            y_y = 1;
+        end
+        
         index = index + 1;
         
         if(index == 50)
-            x = randi([1,magRowsNum]);
-            array(p,1) = x; 
+            x = rand(1,1);
+            x_x = round(x*magRowsNum);
+            
+            if (x_x == 0) 
+                x_x = 1;
+            end
+            
+            array(p,1) = x_x; 
             
             index = 1;
         end
     end
     
-    array(p,2) = y;
-    array(p,3) = randi([1,3]);    
+    array(p,2) = y_y;
+    
+    z = rand(1,1);
+    z_z = round(z*3);
+    
+    if (z_z == 0) 
+        z_z = 1;
+    end
+    
+    array(p,3) = z_z;    
  end
     savefile=strcat('Populacja/',int2str(i),'.dat');
     save(savefile, 'array','-ASCII');

@@ -1,4 +1,4 @@
-function mutationOfSubject(obj,mag)
+function object = mutationOfSubject(obj,mag)
    
     A = obj.palletsArray;
     [magRowsNum, magColumnNum] = size(mag);
@@ -7,29 +7,49 @@ function mutationOfSubject(obj,mag)
     for rows=1:1:rowsNum
         i = randi([1,3]); % wybieramy losowo który parametr mamy zmieniæ w palecie:  x | y | z
         if (i==1)
-            x =randi([1,magRowsNum]);
+            x = rand(1,1);
+            x_x = round(x*magRowsNum);
             
-            while(mag(x,A(rows,i))==8)
-                x = randi([1,magRowsNum]);
+            if (x_x == 0) 
+                x_x = 1;
             end
             
-            A(rows,i) = x;
+            while(mag(int8(x_x),A(rows,2))==8)
+                x = rand(1,1);
+                x_x = round(x*magRowsNum);
+               
+                if (x_x == 0) 
+                    x_x = 1;
+                end
+            end
+            
+            A(rows,i) = int8(x_x);
         end
         
         if (i==2)
-            y =randi([1,magRowsNum]);
+            y = rand(1,1);
+            y_y = round(y*magColumnNum);
             
-            while(mag(y,A(rows,i))==8)
-                y = randi([1,magRowsNum]);
+            if (y_y == 0) 
+                y_y = 1;
             end
             
-            A(rows,i) = y;
+            while(mag(A(rows,1),int8(y_y))==8)
+                y = rand(1,1);
+                y_y = round(y*magColumnNum);
+                
+                if (y_y == 0) 
+                    y_y = 1;
+                end
+            end
+            
+            A(rows,i) = int8(y_y);
         end
         
         if(i==3)
             A(rows,i) = randi([1,3]);
         end
     end
-    
     obj.newMainArray(A);
+    object = obj;
 end
