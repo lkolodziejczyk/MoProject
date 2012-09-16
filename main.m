@@ -30,37 +30,38 @@ end;
 	%GENETYKA, jak pierwsza pêtla to omiñ genetykê
 	if(i~=1) 
 %%%%%%%%%%%przepisywanie najlepszych osobnikow
-		for k=1:(P*N*0.01)
+		for k=1:1:round(P*N*0.01)
 			best(k)=tablicaPopulacji(k);	
         end;
 %%%%%%%%%%przepisanie randomowego z gorszych wynikow
 		%ktory=rand z 10% najgorszych wyników
 		ktory = round(P*0.9+(rand*P*0.1));
-        %bad[]=populacja([ktory][]);
+        bad=tablicaPopulacji(ktory);
 %%%%%%%%%%%do krzy¿owania
-		for m=1:M
+		for m=1:1:round(P*M*0.01)
 			mutowanie(m)=tablicaPopulacji(m); %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
-%%%%%%%%%5czyszczenie populacji (tworzenie kolejnej)
-		for j=0:P
-			%populacja[j][]=0; %czyszczenie tablic nowej populacji
-        end;
+%%%%%%%%%%%%%czyszczenie tablicyPopulacji        
+        for m=1:1:P
+          tablicaPopulacji(m).palletsArray=zeros(Palety,3);
+          %cotam jeszcze jest do wyszyczenia?
+        end;    
 %%%%%%%%%%przepisywanie najlepszych
-        for k=1:(P*N*0.01)
-		%	populacja[k][]=best[k][];	
+        for k=1:1:(P*N*0.01)
+		tablicaPopulacji(k)=best(k);	
         end;
         %kolejny_osobnik=bad;
-            %populacja[(P*N*0.01)+1]=bad[];
+           tablicaPopulacji((P*N*0.01)+1)=bad();
 %%%%%%%%%%%%%%%Mutowane
         poczatek=round((P*N*0.01)+2);
 		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
 			tablicaPopulacji(ile,1) = mutationOfSubject(tablicaPopulacji(ile,1), obiektMagazyn.map);
         end;
 %%%%%%%%%%%%%Krzy¿owanie
-		poczatek2=poczatek+M*0.01+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
-        for ile=poczatek2:P
-%			tablicaPopulacji(ile,1)=CrossingOfSubject(mutowanie,Palety,M);
+		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
+        for ile=poczatek2:1:P
+			tablicaPopulacji(ile).palletsArray=CrossingOfSubject(mutowanie,Palety,M,P);
         end;
    end;
 	%pêtla ma³a (po osobnikach)
