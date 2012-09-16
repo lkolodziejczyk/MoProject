@@ -45,8 +45,8 @@ end;
         end;
 %%%%%%%%%%%%%czyszczenie tablicyPopulacji        
         for m=1:1:P
-          tablicaPopulacji(m).palletsArray=zeros(Palety,3);
-          tablicaPopulacji(m).mainArray=zeros(Palety,5);  
+          tablicaPopulacji(m).palletsArray=[];
+          tablicaPopulacji(m).mainArray=[];  
         end;    
 %%%%%%%%%%przepisywanie najlepszych
         for k=1:1:(P*N*0.01)
@@ -57,7 +57,7 @@ end;
 %%%%%%%%%%%%%%%Mutowane
         poczatek=round((P*N*0.01)+2);
 		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
-			tablicaPopulacji(ile) = mutationOfSubject(tablicaPopulacji(ile), obiektMagazyn.map);
+            tablicaPopulacji(ile) = mutationOfSubject(mutowanie(ile), obiektMagazyn.map);
         end;
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
