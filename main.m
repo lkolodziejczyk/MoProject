@@ -42,6 +42,11 @@ end;
 			mutowanie(m)=tablicaPopulacji(m); %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
+%%%%%%%%%%%%%czyszczenie tablicyPopulacji        
+        for m=1:1:P
+          tablicaPopulacji(m).palletsArray=zeros(Palety,3);
+          %cotam jeszcze jest do wyszyczenia?
+        end;    
 %%%%%%%%%%przepisywanie najlepszych
         for k=1:1:(P*N*0.01)
 		tablicaPopulacji(k)=best(k);	
@@ -56,7 +61,7 @@ end;
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
         for ile=poczatek2:1:P
-			tablicaPopulacji(ile,1)=CrossingOfSubject(mutowanie,Palety,M);
+			tablicaPopulacji(ile).palletsArray=CrossingOfSubject(mutowanie,Palety,M,P);
         end;
    end;
 	%pêtla ma³a (po osobnikach)
