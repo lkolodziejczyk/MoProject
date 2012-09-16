@@ -1,0 +1,44 @@
+############################################################
+###############ENVIROMENT INSTALLATION GUIDE################
+############################################################
+
+1. Components:
+	| - eclipse with c/c++ plug in
+	| - MinGW for windows
+	| -	Gen alg lib - # TODO
+	
+2. Instructions
+
+	2.1	MinGW:
+		Installation package address: 
+			http://sourceforge.net/projects/mingw/files/latest/download?source=files
+		next->next-> choose your oprions etc.
+		IMPORTANT!
+		You need to add folder with binary files to the system path
+		for me it was E:\MinGW\bin
+	
+	2.2 Eclipse IDE:
+		Installation package address:
+		http://www.eclipse.org/downloads/
+		
+		2.2.1 Download Java eclipse (INDIGO) and install C/C++ plug-in:
+			You need to have JVM isntalled first ;/
+			Plugins are in Help->Install new software -> Choose All Available Sites 
+			(its kinda slow worksing thingy so dont panic if it freezes for some time)
+			put in 'cdt' into search and install everything in Programming Languages section
+			and ome other stuff
+			PLZ go to the second  subsubsection ^^
+		2.2.2 Download C/C++ eclipse and be happy ;]
+		
+		IMPORTANT!
+		eclipse does not install but just unpacks
+		
+		2.2.3 Git plug in
+			# TODO
+		
+3. Genethics 
+	# TODO
+				
+4.	Info
+	Jakby byly jakieœ pytania to piszcie
+				
