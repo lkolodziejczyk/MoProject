@@ -56,9 +56,11 @@ end;
            tablicaPopulacji((P*N*0.01)+1)=bad();
 %%%%%%%%%%%%%%%Mutowane
         poczatek=round((P*N*0.01)+2);
-		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
-            tablicaPopulacji(ile) = mutationOfSubject(mutowanie(ile), obiektMagazyn.map);
+		[mutowanieSizeX,mutowanieSizeY] = size(mutowanie);
+        for ile=1:1:mutowanieSizeY %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
+            tablicaPopulacji(poczatek + ile) = mutationOfSubject(mutowanie(ile), obiektMagazyn.map);
         end;
+        
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
 %        for ile=poczatek2:1:P
