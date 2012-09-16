@@ -52,8 +52,27 @@ classdef magazyn
         %% checks if place is empty
         %@param destination place to check
         function ret = check_place(mag, destination)
+            dest_width = tra.destination(1);    %destination width
+            dest_length = tra.destination(2);   %destination length
+            dest_heigth = tra.destination(3);   %destination heigth
+            
+            
+            
+            
             ret = destination;
         end
+        
+        %% check if place is empty
+        %@ param destination place to check
+        function ret = is_place_occupied(mag, destination)
+            ret = mag.map(destination(1), destination(2), destination(3)) == 1;
+        end % is_place_empty
+        
+        %% check if place is reserved
+        %@ param destination place to check
+        function ret = is_place_reserved(mag, destination)
+            ret = mag.map(destination(1), destination(2), destination(3)) == 2;
+        end % is_place_reserved
         
         %% dispaly maazyn map
         function display_current_state(mag)
