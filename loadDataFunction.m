@@ -19,4 +19,5 @@ BaseName='.dat';
         obj = subject(array);
 
         table(a,1) = obj;
+        mutationOfSubject(obj);
     end
