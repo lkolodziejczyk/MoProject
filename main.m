@@ -31,15 +31,15 @@ end;
 	if(i~=1) 
 %%%%%%%%%%%przepisywanie najlepszych osobnikow
 		for k=1:(P*N*0.01)
-		%	best[k][]=populacja[k][];	
+			best(k)=tablicaPopulacji(k);	
         end;
 %%%%%%%%%%przepisanie randomowego z gorszych wynikow
 		%ktory=rand z 10% najgorszych wyników
-		ktory = P*0,9 + (rand * 2);
+		ktory = round(P*0.9+(rand*P*0.1));
         %bad[]=populacja([ktory][]);
 %%%%%%%%%%%do krzy¿owania
 		for m=1:M
-			%mutowane[m][]=populacja[m][]; %pierwsze M osobnikow
+			mutowanie(m)=tablicaPopulacji(m); %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
 %%%%%%%%%5czyszczenie populacji (tworzenie kolejnej)
@@ -53,14 +53,14 @@ end;
         %kolejny_osobnik=bad;
             %populacja[(P*N*0.01)+1]=bad[];
 %%%%%%%%%%%%%%%Mutowane
-        poczatek=(P*N*0.01)+2;
-		for ile=poczatek:(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
-			%populacja[ile][]=Mutacja(mutowanie);
+        poczatek=round((P*N*0.01)+2);
+		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
+			tablicaPopulacji(ile,1) = mutationOfSubject(tablicaPopulacji(ile,1), obiektMagazyn.map);
         end;
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+M*0.01+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
         for ile=poczatek2:P
-			%populacja[ile][]=Krzy¿owanie(mutowanie);
+			tablicaPopulacji(ile,1)=CrossingOfSubject(mutowanie,Palety,M);
         end;
    end;
 	%pêtla ma³a (po osobnikach)

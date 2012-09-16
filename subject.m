@@ -4,6 +4,7 @@ classdef subject
         mainArray; %tablica: index | x | y | z | trasa 5x250
         palletsArray; %tablica: x | y | z
         
+        
     end
     methods
         function obj = subject(A)
@@ -34,11 +35,11 @@ classdef subject
             obj.mainArray = arr;
         end
         
-        function obj = setEndFunction(time)
-            obj.time = time;
+        function obj = setEndFunction(obj,index,time)
+            obj.time(index,1) = time;
         end
         
-        function obj = setRoad(index,road)
+        function obj = setRoad(obj,index,road)
             obj.mainArray(index,4) = road;
         end
     end
