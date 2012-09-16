@@ -64,7 +64,8 @@ for i=1:P
     
     array(p,3) = z_z;    
  end
-    savefile=strcat(int2str(i),'.dat');
+    
+	savefile=strcat(int2str(i),'.dat');
     save(savefile, 'array','-ASCII');
 end;
 %   Detailed explanation goes here
