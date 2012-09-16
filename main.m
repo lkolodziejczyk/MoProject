@@ -38,7 +38,7 @@ end;
 		ktory = round(P*0.9+(rand*P*0.1));
         bad=tablicaPopulacji(ktory);
 %%%%%%%%%%%do krzy¿owania
-		for m=1:1:round(P*M*0.1)
+		for m=1:1:round(P*M*0.01)
 			mutowanie(m)=tablicaPopulacji(m); %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
