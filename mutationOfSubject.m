@@ -62,7 +62,7 @@ function object = mutationOfSubject(obj,mag)
                     z_z = 1;
                 end
          end
-            A(rows,i) = z_z;
+            A(rows,i) = int8(z_z);
 
     end
     
