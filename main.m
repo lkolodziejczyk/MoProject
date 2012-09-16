@@ -60,7 +60,7 @@ end;
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+M*0.01+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
         for ile=poczatek2:P
-			tablicaPopulacji(ile,1)=CrossingOfSubject(mutowanie,Palety,M);
+%			tablicaPopulacji(ile,1)=CrossingOfSubject(mutowanie,Palety,M);
         end;
    end;
 	%pêtla ma³a (po osobnikach)
