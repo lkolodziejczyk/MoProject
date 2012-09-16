@@ -1,4 +1,4 @@
-function [ output_args ] = main( P,N,G,M,K,ILE )
+function [ output_args ] = main( magazynX,magazynY,magazynZ,P,N,G,M,K,ILE )
 
 %parametry WEJŒCIOWE, definicja i odczytywanie zwejœcia
 	%(P)Populacja=liczba osobnikow w populacji, default=50;
@@ -15,11 +15,14 @@ if	(N+M+K)~=100
     M=40;
     K=40;
 end;
-
+%generuj magazyn
+    obiektMagazyn = magazyn(magazynX,magazynY,magazynZ);
+    
 %generuj populacje
 	generacja_populacji(P,Palety);
+    
 %³aduj populacje
-    %tu ta funkcja do ³adowania
+    tablicaPopulacji = loadDataFunction();
     
 %du¿a pêtla(po populacjach)
 	for i=1:ILE
@@ -59,7 +62,7 @@ end;
         for ile=poczatek2:P
 			%populacja[ile][]=Krzy¿owanie(mutowanie);
         end;
-      end;
+   end;
 	%pêtla ma³a (po osobnikach)
 		for j=0:P
 %%%%%%%%%%%%%%%%%PUDE£KO MAGAZYU
@@ -83,4 +86,4 @@ end;
     %plot(odczegoœtam);
 
    
-end;
+end

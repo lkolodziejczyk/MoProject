@@ -8,8 +8,8 @@ classdef subject
     methods
         function obj = subject(A)
             obj.palletsArray = A;
-            array = zeros(250,5); 
             [rowNum,columnNum]=size(A);
+            array = zeros(rowNum,5); 
         
             for rows=1:1:rowNum
                 array(rows,1) = rows; %set wood index 1 - 250
@@ -19,7 +19,21 @@ classdef subject
             end
             obj.mainArray = array;
         end
-
+        
+        function obj = newMainArray(B)
+            obj.palletsArray = B;
+            [rowNum,columnNum]=size(B);
+            array = zeros(rowNum,5); 
+        
+            for rows=1:1:rowNum
+                array(rows,1) = rows; %set wood index 1 - 250
+                for columns=1:1:columnNum
+                   array(rows,1+columns) = A(rows,columns); %set x y z
+                end
+            end
+            obj.mainArray = array;
+        end
+        
         function obj = setEndFunction(time)
             obj.time = time;
         end
