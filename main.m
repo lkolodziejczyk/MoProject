@@ -46,7 +46,7 @@ end;
 %%%%%%%%%%%%%czyszczenie tablicyPopulacji        
         for m=1:1:P
           tablicaPopulacji(m).palletsArray=zeros(Palety,3);
-          %cotam jeszcze jest do wyszyczenia?
+          tablicaPopulacji(m).mainArray=zeros(Palety,5);  
         end;    
 %%%%%%%%%%przepisywanie najlepszych
         for k=1:1:(P*N*0.01)
