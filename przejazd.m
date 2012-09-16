@@ -1,5 +1,5 @@
 classdef przejazd
- %%  
+ %%  komentarz
     properties
         % cel dla paczki
         pid; % paczka_id ?

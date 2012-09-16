@@ -1,5 +1,5 @@
 % function has takes magazyn and subject list and returns subject list with
-% obliczona funkcjia celu XD
+% obliczona funkcjia celu XD komentarz
 % 
 function ret = deploy(magazyn, subject_tab)
    
