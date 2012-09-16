@@ -23,7 +23,6 @@ end;
     
 %³aduj populacje
     tablicaPopulacji = loadDataFunction(obiektMagazyn,P);
-   
 %du¿a pêtla(po populacjach)
 	for i=1:ILE
     
