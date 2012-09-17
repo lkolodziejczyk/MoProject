@@ -45,6 +45,7 @@ end;
             %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
         end;
+        mutowanie
 %%%%%%%%%%%%%czyszczenie tablicyPopulacji        
         for m=1:1:P
           tablicaPopulacji(m).palletsArray=[];
@@ -62,7 +63,7 @@ end;
         for ile=1:1:mutowanieSizeY %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
             tablicaPopulacji(poczatek + ile) = mutationOfSubject(mutowanie(ile), obiektMagazyn.map);
         end;
-        
+        tablicaPopulacji
 %%%%%%%%%%%%%Krzy¿owanie
 		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
         for ile=poczatek2:1:P
