@@ -2,11 +2,6 @@ function object = mutationOfSubject(obj,mag,num)
     A = obj.palletsArray;
     [magRowsNum, magColumnNum, magZNum] = size(mag);
     [rowsNum, columnNum] = size(A);
-   
-	pr = mod(num,100);
-	
-	if(pr*100 == num)
-
 
 		for rows=1:1:rowsNum
          % wybieramy losowo który parametr mamy zmieniæ w palecie:  x | y | z
@@ -66,8 +61,7 @@ function object = mutationOfSubject(obj,mag,num)
 			end
             
 		end
-	
-	end
+
     newObj = subject(A);
     object = newObj;
 	
