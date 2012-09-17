@@ -5,7 +5,7 @@ function ret = deploy(magazyn, subject_tab)
    
     paths = cell(0,0);
     %% get_path loop - calculates and appends path for every subject
-    for j  = 1:size(subject_tab,1)
+    for j  = 1:size(subject_tab,2)
         for i = 1:size(subject_tab(j).mainArray, 1)
             %disp(size(subject_tab,1))
             %disp(size(subject_tab(j).mainArray, 1))
@@ -24,10 +24,11 @@ function ret = deploy(magazyn, subject_tab)
     
 %     paths
 %     return;
-    
+    rescue_map = magazyn.map;
     %% timer loop - not figured out yet
-    for j = 1:2%size(subject_tab(1,:))    %for each subject
+    for j = 1:size(subject_tab,2)    %for each subject
         magazyn.free_wozek_count = magazyn.wozek_count;
+        magazyn.map = rescue_map;
         local_timer = 0;
         subject_timer = 0;
         local_subj_count = size(subject_tab(j).mainArray, 1);
