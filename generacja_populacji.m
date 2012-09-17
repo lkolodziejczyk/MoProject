@@ -64,12 +64,7 @@ for i=1:P
     
     array(p,3) = z_z;    
  end
-<<<<<<< HEAD
-    savefile=strcat(int2str(i),'.dat');
-=======
-    
 	savefile=strcat('Populacja\',int2str(i),'.dat');
->>>>>>> remotes/origin/lukasz
     save(savefile, 'array','-ASCII');
 end;
 %   Detailed explanation goes here
