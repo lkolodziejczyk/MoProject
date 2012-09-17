@@ -45,13 +45,15 @@ classdef trasa
             
             path_iterator = 1;
             
+            
             %% go up
-            if (behind_middle)          %%if detination is above middle the go up
+            if (behind_middle && dest_length > 2)          %%if detination is above middle the go up
                 for i = 1 : magazyn.width
-                    path_iterator = path_iterator + 1;
                     path(path_iterator, :) = [i 1 1];   
+                    path_iterator = path_iterator + 1;
                 end %for
             end %if
+            
             
             %% go right
             
@@ -76,7 +78,7 @@ classdef trasa
             path_length = path(size(path, 1), 2);
             
             %% go down or up depends on destination width
-            if (behind_middle) %go down
+            if (behind_middle && dest_length > 2) %go down
                 length_diff = path_width - dest_width;
                 for i = 1 : length_diff
                     path_iterator = path_iterator + 1;

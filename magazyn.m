@@ -144,6 +144,14 @@ classdef magazyn
             ret = mag.map(destination(1), destination(2), destination(3)) == 8;
         end %is_place_alley
         
+        %% set value on place from destination paremeter
+        %@ param destination place to set
+        %@ param value - value to set
+        function ret = set_place_from_destination(mag, destination, value)
+            mag.map(destination(1), destination(2), 1) = value;
+            ret = mag;
+        end %set_place_from_destination
+        
         %% dispaly magazyn map
         function display_current_state(mag)
             disp(mag.map);
