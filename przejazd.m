@@ -68,13 +68,14 @@ classdef przejazd
         %% check if road ahead is free - works
         function ret = check_free_road(prz, map)
             ret = false;
+           
             temp = prz.trasa(prz.current_trasa_id + 1,:);
-            
+
             if map(temp(1), temp(2), temp(3)) == 8
                 ret = true;
  %           elseif prz.trasa(prz.current_trasa_id) == prz.trasa(prz.current_trasa_id + 1)
  %               ret = true;
-            end
+            end %if
             %TODO
         end % check_free_road
         

@@ -29,6 +29,7 @@ function ret = deploy(magazyn, subject_tab)
     for j = 1:size(subject_tab)    %for each subject
         magazyn.free_wozek_count = magazyn.wozek_count;
         local_timer = 0;
+        subject_timer = 0;
         local_subj_count = size(subject_tab(j).mainArray, 1);
         przejazdy = [];
 %         size(przejazdy)
@@ -38,6 +39,8 @@ function ret = deploy(magazyn, subject_tab)
         
         
         while local_subj_count      %while there are some packs left
+            
+            subject_timer = subject_timer + 1;
             
             display('---------------------------------------');
             disp(local_subj_count)
@@ -106,7 +109,6 @@ function ret = deploy(magazyn, subject_tab)
 %                 if pack_id == 6
 %                     display(['packid6 finished? ', num2str(przejazdy(przejazd_id).check_finished())]);
 %                 end
-                class(przejazdy(przejazd_id))
                 if strcmp(class(przejazdy(przejazd_id)), 'przejazd') && przejazdy(przejazd_id).check_finished()
                     magazyn.free_wozek_count = magazyn.free_wozek_count + 1;
                     local_subj_count = local_subj_count - 1;
@@ -116,13 +118,16 @@ function ret = deploy(magazyn, subject_tab)
                     magazyn = magazyn.set_place_from_destination(przejazdy(przejazd_id).destination, 1);
                     finished(size(finished)+1) = przejazd_id;
                 end % if
-                true;
+                
             end % for
+            
             
             for finished_przejazd_id = 1 : size(finished)
                 przejazdy(finished_przejazd_id) = [];
             end %for
                 
+            
+            
             if (magazyn.is_place_alley(paths{1}{1}.startPoint) && magazyn.free_wozek_count > 0) %get packs for free wozki if start point is free
                 pack_id = pack_id + 1;
                 display('Biore paczke');
@@ -133,6 +138,8 @@ function ret = deploy(magazyn, subject_tab)
                 magazyn.map(nowy_przejazd.location) = 7; % goto location
                 przejazdy = [przejazdy nowy_przejazd];
             end %if
+            
+            true;
                 
 %                 magazyn.map
                                 
