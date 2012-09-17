@@ -1,5 +1,5 @@
 classdef przejazd
- %%  
+ %%  komentarz
     properties
         % cel dla paczki
         pid; % paczka_id ?
@@ -28,7 +28,9 @@ classdef przejazd
             prz.location = trasa(prz.current_trasa_id,:);
             prz.pid = pid;
             prz = prz.update_mag_map(map);
-            prz.map(prz.trasa(prz.current_trasa_id)) = 7;
+            prz.trasa
+            %disp(prz.trasa(prz.current_trasa_id,:));
+            prz.map(prz.trasa(prz.current_trasa_id,:)) = 7;
             
    
         % TODO
@@ -39,14 +41,21 @@ classdef przejazd
         function prz = update_mag_map(prz, map)
             prz.map = map;
         end  %update_map
-        
-        function ret = check_destination(prz, )
+
             
-        % increment timer by 1 
+        %% increment timer by 1 
         % @param time current timer 
         function ret = next_timeframe(prz, time)
             prz.sync = time;
-
+            if prz.check_free_road()
+                disp('go')
+                temp = prz.trasa(prz.current_trasa_id,:);
+                prz.map(temp(1), temp(2), temp(3)) = 8;
+                prz.current_trasa_id  = prz.current_trasa_id + 1;
+                temp = prz.trasa(prz.current_trasa_id,:);
+                prz.location = prz.trasa(prz.current_trasa_id();
+                prz.map(temp(1), temp(2), temp(3)) = 7;
+            end % if
                 
             
             %prz.location = prz.; % todo
@@ -54,25 +63,26 @@ classdef przejazd
             % TODO
         end % next_timeframe
         
-        %% check if road ahead is free
+        %% check if road ahead is free - works
         function ret = check_free_road(prz)
             ret = false;
             temp = prz.trasa(prz.current_trasa_id + 1,:);
-            disp(prz.map(temp(1), temp(2), temp(3)));
-            if prz.map(prz.trasa(prz.current_trasa_id + 1,:)) == 8
+            if prz.map(temp(1), temp(2), temp(3)) == 8
                 ret = true;
-            elseif prz.trasa(prz.current_trasa_id) == prz.trasa(prz.current_trasa_id + 1)
-                ret = true;
+ %           elseif prz.trasa(prz.current_trasa_id) == prz.trasa(prz.current_trasa_id + 1)
+ %               ret = true;
             end
             %TODO
-        end
+        end % check_free_road
         
+        
+        %% check if operation is finished - dzia³a
         function ret = check_finished(prz)
             ret = false;
             if prz.current_trasa_id == size(prz.trasa(:,1))
                 ret = true;
             else
-               ret = false;
+                ret = false;
             end
             
         end % check_finished

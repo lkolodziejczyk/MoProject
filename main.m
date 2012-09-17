@@ -7,7 +7,7 @@ function [ output_args ] = main( magazynX,magazynY,magazynZ,P,N,G,M,K,ILE )
 	%(M)Mutacja = % osobnikow stworzonych poprzez mutacjê, def=40, max=80;
 	%(K)Krzy¿owanie =% osobnikow stworzonych przez krzy¿ówanie, def=40, max80;
 	%(ILE) Iloœæ populacji = ile du¿ych pêtli robimy.	
-    Palety=10;
+    Palety=250;
 %	WARUNEK:(jak nie spe³niony, to mo¿na braæ default dla u³atwienia)
 if	(N+M+K)~=100
     Disp('warunek nie spe³nony, u¿ywane domyœlne parametry: Niezmienione=20%, Mutacja=40%, Krzy¿owanie=40%');
@@ -19,11 +19,15 @@ end;
     obiektMagazyn = magazyn(magazynX,magazynY,magazynZ);
 
 %generuj populacje
-    
 	generacja_populacji(P,Palety,obiektMagazyn.map);
     
 %³aduj populacje
+<<<<<<< HEAD
+    tablicaPopulacji = loadDataFunction(obiektMagazyn,P);
+   
+=======
     tablicaPopulacji = loadDataFunction(P);
+>>>>>>> remotes/origin/lukasz
 %du¿a pêtla(po populacjach)
 	for i=1:ILE
     
@@ -55,6 +59,17 @@ end;
         %kolejny_osobnik=bad;
            tablicaPopulacji((P*N*0.01)+1)=bad();
 %%%%%%%%%%%%%%%Mutowane
+<<<<<<< HEAD
+        poczatek=round((P*N*0.01)+2);
+		for ile=poczatek:1:round(poczatek+M*0.01) %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
+			tablicaPopulacji(ile,1) = mutationOfSubject(tablicaPopulacji(ile,1), obiektMagazyn.map);
+        end;
+%%%%%%%%%%%%%Krzy¿owanie
+		poczatek2=poczatek+round(M*0.01)+1; %zaczynmy w nastêpnym po zmutowanych, koñczymy po K% kolejnych-> czyli na koñcu
+        for ile=poczatek2:1:P
+			tablicaPopulacji(ile)=CrossingOfSubject(mutowanie,Palety,M,P);
+        end;
+=======
         poczatek=round((P*N*0.01)+1); %1 poniewaz ile zaczyna sie od wartosci 1
 		[mutowanieSizeX,mutowanieSizeY] = size(mutowanie);
         for ile=1:1:mutowanieSizeY %zaczynmy w nastêpnym po przepisanych, koñczymy po M% kolejnych
@@ -66,7 +81,9 @@ end;
 %        for ile=poczatek2:1:P
 			%tablicaPopulacji(ile)=CrossingOfSubject(mutowanie,Palety,M,P);
 %        end;
+>>>>>>> remotes/origin/lukasz
    end;
+	
 %%%%%%%%%%%%%%%%%PUDE£KO MAGAZYU
         %tablicaPopulacji=deploy(obiektMagazyn,tablicaPopulacji);
 		%w wyniku do otrzymujemy tablice osobników po przejœciu przezmagazyn wraz z

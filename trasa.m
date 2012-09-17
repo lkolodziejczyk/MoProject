@@ -17,7 +17,7 @@ classdef trasa
             tra.magazyn = magazyn;
             
             if (destination(3) > magazyn.heigth)
-                error(['Paczka too high! - invalid height: ' num2str(dest_heigth), ' is bigger than magazyn height: ', magazyn.heigth]);
+                error(['Paczka too high! - invalid height: ' num2str(destination(3)), ' is bigger than magazyn height: ', magazyn.heigth]);
             end %if
             
             if (~tra.check_if_dest_empty()) %validation - is destination empty
@@ -73,7 +73,7 @@ classdef trasa
                 path(path_iterator, :) = [path_width, i, 1];
             end %for
             
-            path_length = path(length(path), 2);
+            path_length = path(size(path, 1), 2);
             
             %% go down or up depends on destination width
             if (behind_middle) %go down
@@ -90,7 +90,7 @@ classdef trasa
             end %if
             
             %% lift package up (height)
-            path_width = path(length(path), 1);
+            path_width = path(size(path, 1), 1);
             for i = 2 : dest_heigth
                 path_iterator = path_iterator + 1;
                 path(path_iterator, :) = [path_width, path_length, i];
