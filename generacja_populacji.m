@@ -64,6 +64,11 @@ for i=1:P
     
     array(p,3) = z_z;    
  end
+<<<<<<< Temporary merge branch 1
+=======
+    addpath(strcat(pwd,'\Populacja'));
+>>>>>>> Temporary merge branch 2
+    savefile=strcat(int2str(i),'.dat');
     
 	savefile=strcat('Populacja\',int2str(i),'.dat');
     save(savefile, 'array','-ASCII');

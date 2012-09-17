@@ -108,9 +108,7 @@ classdef magazyn
         function ret = check_other_heights_in_destination(mag, destination)
             ret = false;
             for i = 1 : mag.heigth
-               new_destination = [destination(1), destination(2), i]
-               mag.map(new_destination(1), new_destination(2), new_destination(3))
-%                pause;
+                new_destination = [destination(1), destination(2), i];
                 if (~mag.is_place_occupied(new_destination) && ~mag.is_place_reserved(new_destination))
                     ret = new_destination;
                 end %if
