@@ -49,7 +49,8 @@ classdef trasa
             %% go up
             if (behind_middle && dest_length > 2)          %%if detination is above middle the go up
                 for i = 1 : magazyn.width
-                    path(path_iterator, :) = [i 1 1];   
+%                     path_iterator = path_iterator + 1;
+                    path(path_iterator, :) = [i 1 1];  
                     path_iterator = path_iterator + 1;
                 end %for
             end %if
@@ -68,10 +69,15 @@ classdef trasa
             end %switch
 
             path_width = path(size(path, 1), 1);
+            flag = 0;
             
             %go right to the alley when you will turn
             for i = 2 : turn_on_length
-                path_iterator = path_iterator + 1;
+                if (behind_middle && dest_length > 2) && flag == 0
+                    flag = 1;
+                else
+                    path_iterator = path_iterator + 1;
+                end
                 path(path_iterator, :) = [path_width, i, 1];
             end %for
             
