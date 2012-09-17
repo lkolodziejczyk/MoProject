@@ -6,7 +6,7 @@ BaseName='.dat';
         B = load(FileName,'%d %d %d');
         obj = subject(B);
         g = magazyn(20,6,1);
-%        b = mutationOfSubject(obj,mag.map);
-        table = [table obj];
+%       b = mutationOfSubject(obj,mag.map);
+        table(a) = obj;
    end
 end
