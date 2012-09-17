@@ -109,12 +109,12 @@ end;
         %W_min(i)=minimum;
         %W_max(i)=maximum;
         %W_mean(i)=srednia;
-        
+    i    
     end;    
 
 %%%%%%%%%%% wyœwietlanie wykresu z wczeœniej zapisanych wartoœci min,œr i
 %%%%%%%%%%% max
     %plot(odczegoœtam);
 
-   i
+   
 end
