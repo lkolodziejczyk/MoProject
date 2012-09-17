@@ -12,6 +12,7 @@ classdef przejazd
         location; % miejsce w ktorym aktuualnie jestesmy
         destination; %= [x y z]
         map; % current map of magazyn
+        pack_id;
     end % properties
 %%
     methods
@@ -81,7 +82,7 @@ classdef przejazd
         %% check if operation is finished - dzia³a
         function ret = check_finished(prz)
             ret = false;
-%             display(['Prz.check_finished: ', num2str(prz.current_trasa_id), ' ', num2str(size(prz.trasa,1))]);
+            display(['Prz.check_finished: ', num2str(prz.current_trasa_id), ' ', num2str(size(prz.trasa,1))]);
             ret = prz.current_trasa_id == size(prz.trasa,1);
             
         end % check_finished
