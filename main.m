@@ -37,7 +37,10 @@ end;
 		ktory = round(P*0.9+(rand*P*0.1));
         bad=tablicaPopulacji(ktory);
 %%%%%%%%%%%do krzy¿owania
-		for m=1:1:round(P*M*0.01)
+        if(G<M)
+            G=M;
+        end;
+		for m=1:1:round(P*G*0.01)
 			mutowanie(m)=tablicaPopulacji(m);
             %pierwsze M osobnikow
 			%najlepszych s³u¿y do krzy¿owania potem
@@ -102,8 +105,11 @@ end;
    % minimum
    % maximum
    % srednia
-	%jakas_funkcja_zapisujaca_jakos_wyniki(populacja[][]);
-        
+	%jakas_funkcja_zapisujaca_jakos_wyniki;
+        %W_min(i)=minimum;
+        %W_max(i)=maximum;
+        %W_mean(i)=srednia;
+    i    
     end;    
 
 %%%%%%%%%%% wyœwietlanie wykresu z wczeœniej zapisanych wartoœci min,œr i
