@@ -9,7 +9,7 @@ function ret = deploy(magazyn, subject_tab)
         for i = 1:size(subject_tab(j).mainArray, 1)
             %disp(size(subject_tab,1))
             %disp(size(subject_tab(j).mainArray, 1))
-            disp(subject_tab(j).mainArray(i, 2:4))
+%             disp(subject_tab(j).mainArray(i, 2:4))
             paths{j}{i} = trasa(subject_tab(j).mainArray(i, 2:4), magazyn); % konstrutor obiektu trasa
                 %j - subject
                 %i - pack_id
@@ -43,9 +43,9 @@ function ret = deploy(magazyn, subject_tab)
             
             subject_timer = subject_timer + 1;
             
-            display('---------------------------------------');
-            disp(local_subj_count)
-            disp(['Wolne wozki: ', num2str(magazyn.free_wozek_count)]);
+%             display('---------------------------------------');
+%             disp(local_subj_count)
+%             disp(['Wolne wozki: ', num2str(magazyn.free_wozek_count)]);
             
 %             if magazyn.free_wozek_count == 0    %just move other wozki forward
 %                 disp('Brak wolnych wozkow');
@@ -81,7 +81,7 @@ function ret = deploy(magazyn, subject_tab)
                 
             for przejazd_id = 1 : size(przejazdy, 2)    % go to next location if empty
                 
-                display(['OBS£UGA PRZEJADZU NR: ',num2str(przejazd_id)]);
+%                 display(['OBS£UGA PRZEJADZU NR: ',num2str(przejazd_id)]);
                 przejazdy(przejazd_id) = przejazdy(przejazd_id).next_timeframe(local_timer, magazyn.map);
                 przejazdy(przejazd_id).map = magazyn.map;
 %                 przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id - 1, :)
@@ -89,9 +89,9 @@ function ret = deploy(magazyn, subject_tab)
 
                 
                 if przejazdy(przejazd_id).current_trasa_id > 1 %if there was location before
-                    display(['-> Przejazd ', num2str(przejazd_id), ' jedzie z/do']);
-                    display(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id - 1, :));
-                    display(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id, :));
+%                     display(['-> Przejazd ', num2str(przejazd_id), ' jedzie z/do']);
+%                     display(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id - 1, :));
+%                     display(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id, :));
                     magazyn = magazyn.set_place_from_destination(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id - 1, :), 8);    %free last slot
                 end %if
                 
@@ -110,13 +110,13 @@ function ret = deploy(magazyn, subject_tab)
 %                 if pack_id == 6
 %                     display(['packid6 finished? ', num2str(przejazdy(przejazd_id).check_finished())]);
 %                 end
-                true;
+%                 true;
                 if strcmp(class(przejazdy(przejazd_id)), 'przejazd') && przejazdy(przejazd_id).check_finished()
                     magazyn.free_wozek_count = magazyn.free_wozek_count + 1;
                     local_subj_count = local_subj_count - 1;
-                    display(['Skonczyl przejazd nr ', num2str(przejazd_id)]);
-                    display('############################')
-                    display(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id,:));
+%                     display(['Skonczyl przejazd nr ', num2str(przejazd_id)]);
+%                     display('############################')
+%                     display(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id,:));
                     magazyn = magazyn.set_place_from_destination(przejazdy(przejazd_id).trasa(przejazdy(przejazd_id).current_trasa_id, :), 8);    %free last slot
                     przejazdy(przejazd_id).destination
                     magazyn = magazyn.set_place_from_destination(przejazdy(przejazd_id).destination, 1);
@@ -127,7 +127,7 @@ function ret = deploy(magazyn, subject_tab)
             end % for
             if finished
                 subject_tab(j).time = subject_timer; 
-                disp(subject_tab(j).time);
+%                 disp(subject_tab(j).time);
                 przejazdy(finished) = [];
                 
             end
@@ -142,7 +142,7 @@ function ret = deploy(magazyn, subject_tab)
             
             if (magazyn.is_place_alley(paths{1}{1}.startPoint) && magazyn.free_wozek_count > 0) && pack_id < 10 %get packs for free wozki if start point is free
                 pack_id = pack_id + 1;
-                display('Biore paczke');
+%                 display('Biore paczke');
                 magazyn.free_wozek_count = magazyn.free_wozek_count - 1;
                 nowy_przejazd = przejazd(paths{j}{pack_id}.path, local_timer, local_main_array(1,1), magazyn.map);
                 nowy_przejazd.destination = subject_tab(j).mainArray(pack_id, 2:4);
