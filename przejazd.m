@@ -29,7 +29,7 @@ classdef przejazd
             prz.location = trasa(prz.current_trasa_id,:);
             prz.pid = pid;
             prz = prz.update_mag_map(map);
-            prz.trasa
+            %prz.trasa
             %disp(prz.trasa(prz.current_trasa_id,:));
 %             prz.map(prz.trasa(prz.current_trasa_id,:)) = 7;
             
@@ -50,7 +50,9 @@ classdef przejazd
             prz.sync = time;
             prz.update_mag_map(map);
             if prz.check_free_road(map)
-%                 disp('go')
+
+                %disp('go')
+
 %                 temp = prz.trasa(prz.current_trasa_id,:);
 %                 prz.map(temp(1), temp(2), temp(3)) = 8;
                 prz.current_trasa_id  = prz.current_trasa_id + 1;
@@ -84,7 +86,9 @@ classdef przejazd
         %% check if operation is finished - dzia³a
         function ret = check_finished(prz)
             ret = false;
-%             display(['Prz.check_finished: ', num2str(prz.current_trasa_id), ' ', num2str(size(prz.trasa,1))]);
+
+            %display(['Prz.check_finished: ', num2str(prz.current_trasa_id), ' ', num2str(size(prz.trasa,1))]);
+
             ret = prz.current_trasa_id == size(prz.trasa,1);
             
         end % check_finished
